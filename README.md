@@ -2,3 +2,4 @@
 typescript-react-todo-app-practice
 
 A dynamic web todo app
+# ts-rct-rvstd
