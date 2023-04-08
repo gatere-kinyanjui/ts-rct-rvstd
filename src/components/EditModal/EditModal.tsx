@@ -6,10 +6,10 @@ interface Props {
   toggleEditModal: (todo: ITask) => void;
   editTodo: (id: string, newTodoName: string) => void;
   todo: ITask;
-  handleAdd: (todo: ITask, status: TodoStatuses) => void;
+  createTodo: (e: FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
-function EditModal({ toggleEditModal, editTodo, todo, handleAdd }: Props) {
+function EditModal({ toggleEditModal, editTodo, todo, createTodo }: Props) {
   const { taskName, id, status } = todo;
 
   const [newTodoName, setNewTodoName] = useState<string>(taskName);

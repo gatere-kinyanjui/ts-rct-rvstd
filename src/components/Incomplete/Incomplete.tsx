@@ -1,21 +1,18 @@
-import React, { ChangeEvent } from "react";
 import { ITask, TodoStatuses } from "../../lib/Interfaces";
-import { deleteTodo } from "../../lib/DatabaseService";
 
 import "./Incomplete.css";
 
 interface Props {
   todos: ITask[];
-  handleDeleteIncompleteTask: (id: string) => void;
-  handleStatus: (todo: ITask) => void;
+  toggleStatus: (todo: ITask) => void;
+  deleteTodo: (id: string) => void;
   toggleEditModal: (todo: ITask) => void;
-  // completeTask(taskToNameDelete: string): void;
 }
 
 function Incomplete({
   todos,
-  handleDeleteIncompleteTask,
-  handleStatus,
+  toggleStatus,
+  deleteTodo,
   toggleEditModal,
 }: Props) {
   return (
@@ -29,14 +26,13 @@ function Incomplete({
               className="checkbox"
               type="checkbox"
               id={todo.id}
+              checked={todo.status === TodoStatuses.incomplete ? true : false}
+              onChange={() => toggleStatus(todo)}
               // checked={todo.status === TodoStatuses.complete}
-              onChange={(e) => handleStatus(todo)}
             />
             <span className="todoName">{todo.taskName}</span>
           </label>
-
           {/* <span>{task.deadline}</span> */}
-
           <div className="taskBtns">
             <button
               type="button"
@@ -45,11 +41,10 @@ function Incomplete({
             >
               &#9998;
             </button>
-
             <button
               type="button"
               className="deleteBtn"
-              onClick={() => handleDeleteIncompleteTask(todo.id)}
+              onClick={() => deleteTodo(todo.id)}
             >
               &#9747;
             </button>
